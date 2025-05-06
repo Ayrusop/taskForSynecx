@@ -1,5 +1,5 @@
 // controllers/salesController.js
-const { Sale, SaleItem, Product, Category } = require('../models');
+const { Sale, SaleItem, Product, Category,Payment } = require('../models');
 const { Op, fn, col, literal, Sequelize } = require('sequelize');
 // const { Op, fn, col, literal } = require('sequelize'); 
 // 1. Sales Summary
@@ -120,22 +120,42 @@ exports.getSalesByCategory = async (req, res) => {
 // 4. Time-based Trends (daily for last 7 days)
 exports.getTimeTrends = async (req, res) => {
     try {
-        const trends = await Sale.findAll({
-            attributes: [
-                [fn('DATE', col('createdAt')), 'saleDate'],
-                [fn('SUM', col('total')), 'totalSales']
-            ],
-            where: {
-                createdAt: {
-                    [Op.gte]: Sequelize.literal("CURRENT_DATE - INTERVAL '7 days'")
-                }
-            },
-            group: [fn('DATE', col('createdAt'))],
-            order: [[fn('DATE', col('createdAt')), 'ASC']]
-        });
-
-        res.json(trends);
+      const trends = await Sale.findAll({
+        attributes: [
+          [fn('DATE', col('date')), 'saleDate'],
+          [fn('SUM', col('total')), 'totalSales']
+        ],
+        where: {
+          date: {
+            [Op.gte]: Sequelize.literal("CURRENT_DATE - INTERVAL '7 days'")
+          }
+        },
+        group: [fn('DATE', col('date'))],
+        order: [[fn('DATE', col('date')), 'ASC']]
+      });
+  
+      res.json(trends);
     } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch sales trends', details: err.message });
+      res.status(500).json({ error: 'Failed to fetch sales trends', details: err.message });
     }
+  };
+
+
+
+exports.getPaymentMethodBreakdown = async (req, res) => {
+  try {
+    const breakdown = await Payment.findAll({
+      attributes: [
+        'method',
+        [Sequelize.fn('SUM', Sequelize.col('amount')), 'totalAmount']
+      ],
+      group: ['method'],
+      raw: true
+    });
+
+    res.json(breakdown);
+  } catch (error) {
+    console.error('Error fetching payment breakdown:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 };

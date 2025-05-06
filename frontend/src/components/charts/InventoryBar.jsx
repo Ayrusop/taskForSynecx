@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
+import {getInventory} from '../../api/dashboardAPI';
 
 const InventoryBar = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchInventoryByCategory = async () => {
+      try {
+        const response = await getInventory()
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching inventory category data:', error);
+      }
+    };
+
+    fetchInventoryByCategory();
+  }, []);
+
   return (
-    <div className="h-64 flex items-center justify-center text-gray-500">
-      [Inventory Bar Chart Placeholder]
-    </div>
+    <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={data}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="category" />
+        <YAxis />
+        <Tooltip formatter={(value) => `₹${value}`} />
+        <Bar dataKey="totalSales" fill="#8884d8" />
+      </BarChart>
+    </ResponsiveContainer>
   );
 };
 

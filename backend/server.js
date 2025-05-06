@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const salesRoutes = require('./routes/salesRoutes');
 const inventoryRoutes = require('./routes/inventoryRoutes');
 const customerRoutes = require('./routes/customerRoutes');
@@ -8,7 +9,10 @@ const productRoutes = require('./routes/productRoutes');
 const expenseRoutes = require('./routes/expenseRoutes');
 // Middleware
 app.use(express.json());
-
+app.use(cors());
+// app.use(cors({
+//     origin: 'http://localhost:3000'
+//   }));
 // Routes
 app.use('/api/sales', salesRoutes);
 app.use('/api/inventory', inventoryRoutes);

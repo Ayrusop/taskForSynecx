@@ -10,17 +10,23 @@ import SalesChart from '../components/charts/SalesChart';
 import PaymentMethodPie from '../components/charts/PaymentMethodPie';
 import TopProductsChart from '../components/charts/TopProductsChart';
 import InventoryBar from '../components/charts/InventoryBar';
+import SalesByCategoryPie from '../components/charts/SalesByCategoryPie';
+import SalesTrendsChart from '../components/charts/SalesTrendsChart';
+import PopularCombosChart from '../components/charts/PopularCombosChart';
+
 import {
   fetchSalesMetrics,
-  fetchCustomerMetrics,
-  fetchOrderMetrics,
-  fetchInventoryMetrics,
-  fetchFinancialOverview,
-  fetchTopProducts,
-  fetchPaymentBreakdown,
-  fetchTimeTrends,
-  fetchLowStock,
+  // fetchCustomerMetrics,
+  // fetchOrderMetrics,
+  // fetchInventoryMetrics,
+  // fetchFinancialOverview,
+  getTopProducts,
+  getPaymentBreakdown,
+  // fetchTimeTrends,
+  // fetchLowStock,
 } from "../api/dashboardAPI";
+import LowStockTable from "../components/cards/LowStockTable";
+import PeakOrderTimesChart from "../components/charts/PeakOrderTimesChart";
 const Dashboard = () => {
   const [salesData, setSalesData] = useState(null);
   const [customerData, setCustomerData] = useState(null);
@@ -47,14 +53,14 @@ const Dashboard = () => {
           lowStock,
         ] = await Promise.all([
           fetchSalesMetrics(),
-          fetchCustomerMetrics(),
-          fetchOrderMetrics(),
-          fetchInventoryMetrics(),
-          fetchFinancialOverview(),
-          fetchTopProducts(),
-          fetchPaymentBreakdown(),
-          fetchTimeTrends(),
-          fetchLowStock(),
+          // fetchCustomerMetrics(),
+          // fetchOrderMetrics(),
+          // fetchInventoryMetrics(),
+          // fetchFinancialOverview(),
+          getTopProducts(),
+          getPaymentBreakdown(),
+          // fetchTimeTrends(),
+          // fetchLowStock(),
         ]);
 
         setSalesData(sales.data);
@@ -73,47 +79,70 @@ const Dashboard = () => {
 
     fetchAll();
   }, []);
-  
+
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Supermarket Dashboard</h1>
 
       {/* 🔷 Metric Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        <SalesMetrics data={salesData}/>
+        <SalesMetrics data={salesData} />
         <CustomerMetrics data={customerData} />
-        <OrderMetrics data={orderData} />
-        <InventoryMetrics data={inventoryData}  />
-        <FinancialOverview data={financialData}/>
+        <OrderMetrics  />
+        <InventoryMetrics  />
+        <FinancialOverview data={financialData} />
       </div>
 
       {/* 📊 Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white p-4 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">Sales Over Time</h2>
-          <SalesChart ata={timeTrends}/>
+          <SalesChart ata={timeTrends} />
         </div>
 
         <div className="bg-white p-4 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">Payment Method Breakdown</h2>
-          <PaymentMethodPie data={paymentBreakdown}/>
+          <PaymentMethodPie/>
         </div>
 
         <div className="bg-white p-4 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">Top Selling Products</h2>
-          <TopProductsChart 
-          topProducts={topProducts}
+          <TopProductsChart
+            topProducts={topProducts}
           />
         </div>
 
         <div className="bg-white p-4 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">Inventory by Category</h2>
-          <InventoryBar 
-          inventoryData={inventoryData}
-          lowStockAlerts={lowStockAlerts}
-          
+          <InventoryBar
+            inventoryData={inventoryData}
+            lowStockAlerts={lowStockAlerts}
+
           />
         </div>
+
+        <div className="bg-white p-4 rounded-xl shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">Sales by Category</h2>
+          <SalesByCategoryPie />
+        </div>
+
+        <div className="bg-white p-4 rounded-xl shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">Sales Over Time</h2>
+          <SalesTrendsChart />
+        </div>
+        <div className="bg-white p-4 rounded-xl shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">Low Stock Table</h2>
+          <LowStockTable />
+        </div>
+        <div className="bg-white p-4 rounded-xl shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">Popular Product Combos</h2>
+          <PopularCombosChart />
+        </div>
+        <div className="bg-white p-4 rounded-xl shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">Peak Order Times</h2>
+          <PeakOrderTimesChart />
+        </div>
+
       </div>
     </div>
   );
