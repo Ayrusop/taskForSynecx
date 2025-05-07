@@ -1,30 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { getSalesByCategory } from '../../api/dashboardAPI';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const COLORS = ['#60a5fa', '#facc15', '#34d399', '#f472b6', '#a78bfa', '#f87171'];
+import { fetchGroupedExpenses } from '../../api/dashboardAPI';
 
-const SalesByCategoryPie = () => {
+// Color palette for pie slices
+const COLORS = [
+  '#60a5fa', '#facc15', '#34d399', '#f472b6', 
+  '#a78bfa', '#f87171', '#fb923c', '#c084fc', 
+  '#4ade80', '#fda4af'
+];
+
+const ExpensesChart = () => {
   const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    const fetchSalesByCategory = async () => {
-      try {
-        const result = await getSalesByCategory();
-        // Expected: [{ category: 'Dairy', totalSales: 90 }, ...]
-        const formatted = result.map(item => ({
-          name: item.category,
-          value: item.totalSales
-        }));
-        setData(formatted);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching category sales:', err);
-      }
-    };
-
-    fetchSalesByCategory();
+    fetchGroupedExpenses().then(setData);
+    setLoading(false);
   }, []);
   if (loading) return <p>Loading...</p>;
   return (
@@ -49,4 +40,4 @@ const SalesByCategoryPie = () => {
   );
 };
 
-export default SalesByCategoryPie;
+export default ExpensesChart;

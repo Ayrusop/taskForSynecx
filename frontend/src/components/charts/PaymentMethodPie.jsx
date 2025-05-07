@@ -6,7 +6,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA66CC'];
 
 const PaymentMethodPie = () => {
   const [data, setData] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchPaymentBreakdown = async () => {
       try {
@@ -17,15 +17,16 @@ const PaymentMethodPie = () => {
           value: parseFloat(item.totalAmount)
         }));
         setData(formatted);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching payment breakdown:', error);
       }
     };
 
     fetchPaymentBreakdown();
+   
   }, []);
-
-
+  if (loading) return <p>Loading...</p>;
   return data.length > 0 ? (
     <ResponsiveContainer width="100%" height={300}>
       <PieChart>

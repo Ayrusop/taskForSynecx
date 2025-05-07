@@ -6,6 +6,7 @@ import {
 
 const TopProductsChart = () => {
   const [chartData, setChartData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTopProducts = async () => {
@@ -20,6 +21,7 @@ const TopProductsChart = () => {
         }));
 
         setChartData(formatted);
+        setLoading(false);
       } catch (err) {
         console.error('Error fetching top products:', err);
       }
@@ -27,7 +29,7 @@ const TopProductsChart = () => {
 
     fetchTopProducts();
   }, []);
-
+  if (loading) return <p>Loading...</p>;
   return (
     <ResponsiveContainer width="100%" height={300}>
       <BarChart data={chartData} margin={{ top: 20, right: 30, bottom: 5, left: 0 }}>

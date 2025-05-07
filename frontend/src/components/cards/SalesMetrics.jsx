@@ -20,15 +20,13 @@ const SalesMetrics = () => {
   }
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow">
-      <h2 className="text-lg font-semibold text-gray-700 mb-2">Sales Metrics</h2>
-      <ul className="text-sm text-gray-600 space-y-1">
-        <li>🗓️ <strong>Daily:</strong> ₹{data?.dailySales}</li>
-        <li>📅 <strong>Weekly:</strong> ₹{data?.weeklySales}</li>
-        <li>📆 <strong>Monthly:</strong> ₹{data?.monthlySales}</li>
-        <li>💳 <strong>Avg. Bill value:</strong> ₹{data?.avgBillValue}</li>
-        <li>💳 <strong>Total Bills:</strong> ₹{data?.totalBills}</li>
-      </ul>
+    <div className="bg-primary p-4 rounded-lg shadow">
+      <h2 className="text-lg font-semibold text-gray-700 mb-2">Payment Metrics</h2>
+      <p>Daily: <b>₹{data?.dailySales}</b></p>
+      <p>Weekly: <b>₹{data?.weeklySales}</b></p>
+      <p>Monthly: <b> ₹{data?.monthlySales}</b></p>
+      <p>Avg. Bill value: <b>₹{data?.avgBillValue}</b></p>
+      <p>Total Bills: <b> ₹{data?.totalBills}</b></p>
     </div>
   );
 };

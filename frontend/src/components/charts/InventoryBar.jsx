@@ -5,19 +5,21 @@ import {getInventory} from '../../api/dashboardAPI';
 const InventoryBar = () => {
   const [data, setData] = useState([]);
 
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchInventoryByCategory = async () => {
       try {
         const response = await getInventory()
         setData(response.data);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching inventory category data:', error);
       }
     };
-
+ 
     fetchInventoryByCategory();
   }, []);
-
+  if (loading) return <p>Loading...</p>;
   return (
     <ResponsiveContainer width="100%" height={300}>
       <BarChart data={data}>

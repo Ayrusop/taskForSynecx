@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.bg-primary{
+    background: #aadd98;
+}
+.bg-primary1{
+    background: #c8c1f1;
+}
+.bg-primary2{
+    background: #7cccbf;
+}
+.bg-primary3{
+    background: #b4bdfe;
+}
+.bg-secondary{
+    background: #092520;
+}

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
+import { fetchLowStock } from '../../api/dashboardAPI';
 
 const LowStockTable = () => {
   const [lowStock, setLowStock] = useState([]);
-
+    const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get('http://localhost:5000/api/inventory/low-stock?threshold=50')
-      .then(res => setLowStock(res.data.lowStock))
-      .catch(err => console.error('Failed to fetch low stock data', err));
+    fetchLowStock().then(setLowStock);
+    setLoading(false);
   }, []);
-
+  if (loading) return <p>Loading...</p>;
   return (
     <div className="bg-white p-4 rounded-xl shadow mt-6">
-      <h3 className="text-lg font-semibold mb-4 text-gray-700">Low Stock Products</h3>
+      
       <table className="w-full text-left text-sm">
         <thead>
           <tr className="border-b text-gray-600">

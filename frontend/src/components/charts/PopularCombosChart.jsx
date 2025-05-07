@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGri
 
 const PopularCombosChart = () => {
   const [data, setData] = useState([]);
-
+ const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchPopularCombos = async () => {
       try {
@@ -17,13 +17,15 @@ const PopularCombosChart = () => {
         setData(formatted);
       } catch (error) {
         console.error('Error fetching popular combos:', error);
-      }
+      }  
+      setLoading(false);
     };
   
     fetchPopularCombos();
+  
   }, []);
   
-
+  if (loading) return <p>Loading...</p>;
   return (
     <div className="bg-white p-4 rounded-xl shadow w-full">
       

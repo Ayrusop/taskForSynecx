@@ -12,7 +12,7 @@ import {
 
 const SalesTrendsChart = () => {
   const [data, setData] = useState([]);
-
+    const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchTrends = async () => {
       try {
@@ -23,14 +23,16 @@ const SalesTrendsChart = () => {
           sales: item.totalSales,
         }));
         setData(formatted);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching time trends:', error);
       }
     };
 
     fetchTrends();
+    
   }, []);
-
+  if (loading) return <p>Loading...</p>;
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
