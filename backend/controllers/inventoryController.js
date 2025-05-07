@@ -1,4 +1,4 @@
-// controllers/inventoryController.js
+
 const { Product, SaleItem } = require('../models');
 const { fn, col, literal, Sequelize } = require('sequelize');
 

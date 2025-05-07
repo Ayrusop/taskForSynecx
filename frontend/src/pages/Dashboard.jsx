@@ -15,7 +15,7 @@ import LowStockTable from "../components/cards/LowStockTable";
 import PeakOrderTimesChart from "../components/charts/PeakOrderTimesChart";
 import ExpensesChart from "../components/charts/ExpensesPie";
 import ProductMovementChart from "../components/charts/ProductMovementChart";
-import { Menu, X } from "lucide-react"; // using lucide-react for icons
+import { Menu, X } from "lucide-react"; 
 import ProductListTable from "../components/cards/ProductListTable";
 
 const Dashboard = () => {
@@ -56,14 +56,13 @@ const Dashboard = () => {
         {/* Top Bar */}
         <div className="bg-secondary text-white flex items-center p-4 shadow justify-between md:justify-center mt-2">
           <button onClick={toggleSidebar} className="md:hidden">
-            <Menu className="h-6 w-6" />
+           <Menu className="h-6 w-6" /> 
           </button>
           <h1 className="text-3xl font-bold mb-6 text-white text-center">Supermarket Dashboard</h1>
         </div>
 
-        {/* Content */}
         <div className="p-6">
-          {/* 🔷 Metric Cards */}
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
             <SalesMetrics />
             <CustomerMetrics />
@@ -71,7 +70,7 @@ const Dashboard = () => {
             <InventoryMetrics />
           </div>
 
-          {/* 📊 Charts Section */}
+       
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <ChartCard title="Product Table"><ProductListTable /></ChartCard>
             <ChartCard title="Sales Over Time"><SalesTrendsChart /></ChartCard>

@@ -1,8 +1,7 @@
 const { Order, OrderItem, Product } = require('../models');
 const { Op, fn, col, literal, Sequelize } = require('sequelize');
 
-// 1. Total Orders by Time Period
-//	/api/orders/counts	`?period=daily
+
 exports.getOrderCounts = async (req, res) => {
     try {
         const { period } = req.query;
@@ -27,7 +26,7 @@ exports.getOrderCounts = async (req, res) => {
     }
 };
 
-// 2. Average Items Per Order
+
 exports.getAvgItemsPerOrder = async (req, res) => {
     try {
         const result = await OrderItem.findAll({
@@ -44,7 +43,7 @@ exports.getAvgItemsPerOrder = async (req, res) => {
     }
 };
 
-// 3. Order Fulfillment Time (difference between createdAt and fulfilledAt)
+
 
 
 exports.getAvgFulfillmentTime = async (req, res) => {
@@ -70,7 +69,7 @@ exports.getAvgFulfillmentTime = async (req, res) => {
 };
 
 
-// 4. Order Cancellation Rate
+
 exports.getCancellationRate = async (req, res) => {
     try {
         const totalOrders = await Order.count();
@@ -84,7 +83,7 @@ exports.getCancellationRate = async (req, res) => {
     }
 };
 
-// 5. Most Common Order Combinations (frequent item pairs - basic example)
+
 exports.getPopularCombinations = async (req, res) => {
     try {
         const combinations = await OrderItem.findAll({
@@ -106,7 +105,7 @@ exports.getPopularCombinations = async (req, res) => {
     }
 };
 
-// 6. Peak Ordering Times (by hour)
+
 exports.getPeakOrderTimes = async (req, res) => {
     try {
         const orders = await Order.findAll({

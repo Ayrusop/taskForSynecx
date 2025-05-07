@@ -13,7 +13,7 @@ const TopProductsChart = () => {
       try {
         const result = await getTopProducts();
 
-        // Transform API data to match chart structure
+        
         const formatted = result.map(item => ({
           name: item.Product?.name || 'Unknown',
           unitsSold: parseInt(item.totalSold),

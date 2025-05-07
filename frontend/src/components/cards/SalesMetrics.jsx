@@ -1,4 +1,3 @@
-// src/components/cards/SalesMetrics.jsx
 import React, { useEffect, useState } from 'react';
 import { fetchSalesMetrics } from '../../api/dashboardAPI';
 

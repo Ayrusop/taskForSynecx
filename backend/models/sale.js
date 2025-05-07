@@ -4,11 +4,10 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Sale extends Model {
     static associate(models) {
-      // A Sale has many Payments
+ 
       Sale.hasMany(models.Payment, { foreignKey: 'saleId' });
 
-      // Optionally, if you have a Customer model:
-      // Sale.belongsTo(models.Customer, { foreignKey: 'customerId' });
+
     }
   }
 
@@ -35,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Sale',
-      tableName: 'Sales', // Ensure matches actual DB table
-      timestamps: true // Enables createdAt and updatedAt
+      tableName: 'Sales', 
+      timestamps: true 
     }
   );
 

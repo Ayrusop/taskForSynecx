@@ -2,7 +2,7 @@
 const { Sale, SaleItem, Product, Category,Payment } = require('../models');
 const { Op, fn, col, literal, Sequelize } = require('sequelize');
 // const { Op, fn, col, literal } = require('sequelize'); 
-// 1. Sales Summary
+
 exports.getSalesSummary = async (req, res) => {
     try {
         const today = new Date();
@@ -40,7 +40,7 @@ exports.getSalesSummary = async (req, res) => {
     }
 };
 
-// 2. Top-Selling Products (limit 5)
+
 exports.getTopProducts = async (req, res) => {
     const item = await SaleItem.findOne({
         where: { productId: 5 },
@@ -78,7 +78,7 @@ exports.getTopProducts = async (req, res) => {
     }
 };
 
-// 3. Sales by Category
+
 exports.getSalesByCategory = async (req, res) => {
     try {
         const results = await SaleItem.findAll({
@@ -117,7 +117,7 @@ exports.getSalesByCategory = async (req, res) => {
     }
 };
 
-// 4. Time-based Trends (daily for last 7 days)
+
 exports.getTimeTrends = async (req, res) => {
     try {
       const trends = await Sale.findAll({

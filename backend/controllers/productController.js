@@ -1,6 +1,6 @@
 const { Product, Category } = require('../models');
 
-// Get all products
+// Get all 
 exports.getAllProducts = async (req, res) => {
     try {
         const products = await Product.findAll();
@@ -11,7 +11,7 @@ exports.getAllProducts = async (req, res) => {
     }
 };
 
-// Get single product
+// Get single 
 exports.getProductById = async (req, res) => {
     try {
         const product = await Product.findByPk(req.params.id);
@@ -22,7 +22,7 @@ exports.getProductById = async (req, res) => {
     }
 };
 
-// Create product
+// Create 
 exports.createProduct = async (req, res) => {
     try {
         const product = await Product.create(req.body);
@@ -32,7 +32,7 @@ exports.createProduct = async (req, res) => {
     }
 };
 
-// Update product
+// Update 
 exports.updateProduct = async (req, res) => {
     try {
         const product = await Product.findByPk(req.params.id);
@@ -44,7 +44,7 @@ exports.updateProduct = async (req, res) => {
     }
 };
 
-// Delete product
+// Delete 
 exports.deleteProduct = async (req, res) => {
     try {
         const product = await Product.findByPk(req.params.id);

@@ -12,7 +12,6 @@ const SalesByCategoryPie = () => {
     const fetchSalesByCategory = async () => {
       try {
         const result = await getSalesByCategory();
-        // Expected: [{ category: 'Dairy', totalSales: 90 }, ...]
         const formatted = result.map(item => ({
           name: item.category,
           value: item.totalSales

@@ -1,4 +1,3 @@
-// src/components/InventoryMetrics.jsx
 import React, { useEffect, useState } from 'react';
 import { fetchInventoryMovement } from '../../api/dashboardAPI';
 

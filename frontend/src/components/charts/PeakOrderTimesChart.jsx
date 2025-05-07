@@ -10,7 +10,7 @@ const PeakOrderTimesChart = () => {
       try {
         const response = await getPeakOrderTimes();
   
-        // Convert 24-hour to 12-hour format with AM/PM
+        
         const formattedData = response.map(item => {
           const hour = parseInt(item.hour, 10);
           const ampm = hour >= 12 ? 'PM' : 'AM';

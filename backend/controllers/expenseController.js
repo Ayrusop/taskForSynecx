@@ -1,6 +1,6 @@
 const { Expense } = require('../models');
 
-// Get all expenses
+// Get 
 exports.getAllExpenses = async (req, res) => {
     try {
         const expenses = await Expense.findAll({ order: [['date', 'DESC']] });
@@ -10,7 +10,7 @@ exports.getAllExpenses = async (req, res) => {
     }
 };
 
-// Add new expense
+// Add 
 exports.createExpense = async (req, res) => {
     try {
         const expense = await Expense.create(req.body);
@@ -20,7 +20,7 @@ exports.createExpense = async (req, res) => {
     }
 };
 
-// Update an expense
+// Update 
 exports.updateExpense = async (req, res) => {
     try {
         const expense = await Expense.findByPk(req.params.id);
@@ -32,7 +32,7 @@ exports.updateExpense = async (req, res) => {
     }
 };
 
-// Delete an expense
+// Delete 
 exports.deleteExpense = async (req, res) => {
     try {
         const expense = await Expense.findByPk(req.params.id);

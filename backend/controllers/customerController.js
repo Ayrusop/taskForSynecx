@@ -1,7 +1,7 @@
 const { Customer, Order } = require('../models');
 const { Op, fn, col, literal } = require('sequelize');
 
-// 1. Total Customer Count
+
 exports.getTotalCustomers = async (req, res) => {
     try {
         const count = await Customer.count();
@@ -11,7 +11,7 @@ exports.getTotalCustomers = async (req, res) => {
     }
 };
 
-// 2. New vs Returning Customers (last 30 days)
+
 exports.getCustomerTypeStats = async (req, res) => {
     try {
         const recentOrders = await Order.findAll({
@@ -46,7 +46,7 @@ exports.getCustomerTypeStats = async (req, res) => {
     }
 };
 
-// 3. Visit Frequency (orders per customer average)
+
 exports.getCustomerVisitFrequency = async (req, res) => {
     try {
         const totalOrders = await Order.count();
@@ -60,7 +60,7 @@ exports.getCustomerVisitFrequency = async (req, res) => {
     }
 };
 
-// 4. Average Spend per Customer
+
 exports.getAvgSpendPerCustomer = async (req, res) => {
     try {
         const result = await Order.findAll({

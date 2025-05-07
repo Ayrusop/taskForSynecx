@@ -44,7 +44,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    // Drop ENUMs before dropping the table to avoid type conflicts
+    
     await queryInterface.dropTable('Orders');
     await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_Orders_status";');
     await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_Orders_paymentMethod";');

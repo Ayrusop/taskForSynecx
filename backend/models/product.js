@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
   
       Product.hasMany(models.SaleItem, { foreignKey: 'productId' });
-      Product.belongsTo(models.Category, { foreignKey: 'categoryId' }); // ✅ This line is essential
+      Product.belongsTo(models.Category, { foreignKey: 'categoryId' });
     }
   }
 

@@ -148,13 +148,13 @@ export const fetchGroupedExpenses = async () => {
         const response = await axios.get(`${baseURL}/expense/allexpense`);
         const expenses = response.data;
 
-        // Group by type and sum the amounts
+        
         const grouped = expenses.reduce((acc, item) => {
             acc[item.type] = (acc[item.type] || 0) + item.amount;
             return acc;
         }, {});
 
-        // Convert to array of objects for chart or UI
+       
         return Object.entries(grouped).map(([type, total]) => ({
             name: type,
             value: total
